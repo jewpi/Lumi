@@ -1,0 +1,71 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.ipynb_checkpoints/
+
+# DB / 환경변수
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+
+# 업로드 도면 (백엔드 미디어 — 로컬 기본 UPLOAD_DIR)
+web/backend/media/
+
+# Node (프론트엔드)
+node_modules/
+dist/
+coverage/
+.vite/
+.cache/
+*.local
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+desktop.ini
+*.swp
+*.swo
+*~
+
+# Claude Code (개인 설정)
+.claude/
+
+# .pem
+*.pem
+*.key
+*.p12
+*.pfx
+
+# CMake / native builds
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+compile_commands.json
+
+# ROS 2
+ros2/build/
+ros2/install/
+ros2/log/

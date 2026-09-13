@@ -1,0 +1,310 @@
+/* ── 디자인 토큰 (웜/앰버 관제 톤 · 목업 기준) ───────────
+   색·폰트를 여기 한 곳에서 관리한다. 컴포넌트는 이 변수만 참조 — 스코프 스타일에 색을
+   직접 적으면 다크 팔레트가 그 조각만 못 덮어 흰 자국으로 남는다.
+
+   예외는 지도 마커뿐이다(MapPanel). 지도 래스터는 두 모드에서 다 밝으므로 그 위에
+   얹히는 색은 테마를 따라가면 안 된다 — 그쪽은 일부러 값을 박아 뒀다. */
+:root {
+  /* 표면 */
+  --paper: #f4f2ed; /* 페이지 배경(종이) */
+  --card: #ffffff; /* 카드·상단바 배경 */
+  --surface: #ffffff; /* 그 위에 얹히는 컨트롤(pill·입력·버튼) */
+  /* 텍스트 */
+  --ink: #171614; /* 본문 잉크 */
+  --sub: #6e6a62; /* 보조 텍스트 */
+  --muted: #98938a; /* 흐린 라벨 */
+  --on-ink: #ffffff; /* --ink를 배경으로 깔았을 때의 글자 */
+  --ink-hover: #3a3833; /* 잉크 버튼 호버 */
+  --ink-strong: #000000; /* 잉크 CTA 호버(더 진하게) */
+  /* 선 */
+  --line: #e3e0d8; /* 기본 테두리 */
+  --line-soft: #edeae3; /* 카드 헤더 구분선 */
+  --line-row: #f0ede6; /* 행 구분선 */
+  --field: #d8d4cc; /* 입력 테두리 */
+  /* 앰버(주 강조) */
+  --amber: #e8a23c;
+  --amber-hover: #f0b355;
+  --amber-deep: #9a6a15; /* 앰버 톤 위 텍스트 */
+  --amber-tint: #fbf1de; /* 앰버 배경 틴트 */
+  --amber-tint-line: #e8ce9e;
+  /* 상태 */
+  --danger: #b23a2a;
+  --danger-tint: #f6e3df;
+  --danger-text: #a93a2b;
+  --danger-line: #e0afa5;
+  --danger-row: #fcf5f3;
+  --danger-strong: #9a3225; /* 개입 요청 '해결' 버튼 */
+  --ok: #5c7f4f; /* 도착·완료(어스 톤 그린) */
+  --ok-tint: #eaf1e6;
+  --ok-line: #cfe0c5;
+  --neutral-tint: #f1efe9;
+  --neutral-line: #ddd9d1;
+  /* 배지 */
+  --chip-bg: #dedbd4; /* 대기 상태 배지 */
+  --chip-text: #6e6960;
+  --live-tint: #dcebdc; /* 수신 중 배지 */
+  --live-text: #286438;
+  /* 지도·경고 */
+  --link-live: #15803d; /* '로봇 연결' 태그 */
+  --warn-text: #b45309; /* 지도 하단 경고 문구 */
+  /* 폰트 */
+  --font-sans: 'IBM Plex Sans KR', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', Consolas, monospace;
+}
+
+/* ── 다크 팔레트 ────────────────────────────
+   :root를 덮어쓰기만 한다. data-theme은 index.html의 인라인 스크립트가 첫 페인트 전에
+   박아 두므로, 새로고침할 때 흰 화면이 번쩍이지 않는다.
+
+   흰 배경을 그대로 반전하지 않고 웜 그레이로 내렸다 — 앰버가 주 강조색이라 중성 회색
+   위에 얹으면 색이 탁해진다. */
+:root[data-theme='dark'] {
+  --paper: #131211;
+  --card: #1c1b18;
+  --surface: #232019;
+  --ink: #ece8e0;
+  --sub: #b0aaa0;
+  --muted: #8a8479;
+  /* 잉크가 밝아졌으므로 그 위의 글자는 반대로 어두워져야 한다 */
+  --on-ink: #171614;
+  --ink-hover: #d3cec4;
+  --ink-strong: #ffffff;
+  --line: #322e28;
+  --line-soft: #2a2722;
+  --line-row: #26231e;
+  --field: #3d3830;
+  /* 앰버는 브랜드색이라 유지하고, 틴트만 어두운 갈색으로 뒤집는다 */
+  --amber: #e8a23c;
+  --amber-hover: #f0b355;
+  --amber-deep: #f0c078;
+  --amber-tint: #3a2c14;
+  --amber-tint-line: #5a4520;
+  --danger: #d9563f;
+  --danger-tint: #3a1e19;
+  --danger-text: #f0907c;
+  --danger-line: #5e2c23;
+  --danger-row: #241614;
+  --danger-strong: #b8422f;
+  --ok: #85ad74;
+  --ok-tint: #1e2a19;
+  --ok-line: #33472c;
+  --neutral-tint: #26231e;
+  --neutral-line: #37332c;
+  --chip-bg: #34302a;
+  --chip-text: #a9a297;
+  --live-tint: #1c2b1f;
+  --live-text: #86c896;
+  --link-live: #5fbd7e;
+  --warn-text: #e0a55a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--paper);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--amber-deep);
+  text-decoration: none;
+}
+a:hover {
+  color: #6e4a0b;
+}
+
+main {
+  max-width: 1560px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── 상단바(.topbar)는 App.vue 스코프 스타일에서 관리 ─────── */
+
+/* ── 비상 경고 배너 ──────────────────────── */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 20px 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background: var(--danger-tint);
+  border: 1px solid var(--danger);
+  color: var(--danger-text);
+}
+.alert button {
+  margin-left: auto;
+}
+
+/* ── 공용 요소 ──────────────────────────── */
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px 20px;
+}
+
+.card h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--sub);
+  font-weight: 600;
+}
+
+.grid4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* 대시보드 2컬럼(.dash2)은 DashboardView.vue 스코프 스타일에서 관리 */
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.row h3 {
+  margin: 0;
+  flex: none;
+}
+
+.big {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+.big[data-status='WALKING'] {
+  color: var(--amber-deep);
+}
+.big[data-status='ARRIVED'] {
+  color: var(--ok);
+}
+.big[data-status='STANDBY'] {
+  color: var(--muted);
+}
+.big[data-status='EMERGENCY'] {
+  color: var(--danger);
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  word-break: break-all;
+}
+
+select,
+button {
+  font: inherit;
+  padding: 6px 12px;
+  border-radius: 7px;
+  border: 1px solid var(--field);
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* 입력은 컴포넌트마다 모양이 달라 전역으로는 색만 잡는다 — 안 잡으면 다크에서
+   브라우저 기본 검은 글자가 어두운 배경 위에 그대로 남는다 */
+input,
+textarea {
+  color: var(--ink);
+  background: var(--surface);
+}
+
+button {
+  cursor: pointer;
+  background: var(--ink);
+  color: var(--on-ink);
+  border-color: var(--ink);
+}
+button:hover {
+  background: var(--ink-hover);
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+  background: var(--ink);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+th,
+td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--line-row);
+}
+th {
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.badge {
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  background: var(--neutral-tint);
+  color: var(--sub);
+  border: 1px solid var(--neutral-line);
+}
+.badge[data-level='WARNING'] {
+  background: var(--amber-tint);
+  color: var(--amber-deep);
+  border-color: var(--amber-tint-line);
+}
+.badge[data-level='CRITICAL'] {
+  background: var(--danger-tint);
+  color: var(--danger-text);
+  border-color: var(--danger-line);
+}
+
+/* ── 모바일 여백 ────────────────────────────
+   데스크톱 여백(20px 패딩 + 16px 간격 + 카드 안쪽 16/20)을 좁은 화면에 그대로 쓰면
+   가로 375px 중 40px이 여백으로 나가고, 세로로도 카드 사이가 벌어져 지도가 첫 화면
+   밖으로 밀린다. 관제 화면에서는 지도가 스크롤 없이 보이는 쪽이 낫다. */
+@media (max-width: 720px) {
+  main {
+    padding: 12px;
+    gap: 12px;
+  }
+  .card {
+    padding: 13px 14px;
+  }
+  .alert {
+    margin: 10px 12px 0;
+    padding: 11px 13px;
+  }
+  .grid4,
+  .grid2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

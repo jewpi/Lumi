@@ -1,0 +1,38 @@
+lumi_mission_controller:
+  ros__parameters:
+    # RViz Publish Point로 측정한 map 기준 경유 좌표.
+    # yaw_deg는 각 중간점에서 다음 waypoint를 바라보도록 계산했다.
+    frame_id: map
+
+    waypoint_1:
+      x: 6.396567344665527
+      y: 9.542069435119629
+      yaw_deg: -5.926458126182377
+
+    waypoint_2:
+      x: 8.518199920654297
+      y: 9.321829795837402
+      yaw_deg: -5.578986366100055
+
+    waypoint_3:
+      x: 11.910645484924316
+      y: 8.990453720092773
+      yaw_deg: 50.10228406507344
+
+    waypoint_4:
+      x: 12.916056632995605
+      y: 10.193009376525879
+      yaw_deg: -0.1325066452225591
+
+    waypoint_5:
+      x: 18.769611358642578
+      y: 10.179471969604492
+      yaw_deg: 69.94402971157095
+
+    waypoint_6:
+      x: 18.942485809326172
+      y: 10.653000831604004
+      yaw_deg: 69.94402971157095
+
+    start_topic: /jetson_ai/lab_guide_requested
+    wait_after_waypoint_2_seconds: 6.0

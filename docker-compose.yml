@@ -1,0 +1,29 @@
+services:
+  backend:
+    build: ./web/backend
+    # 인증 시크릿(SECRET_KEY·ADMIN_*)은 backend 폴더의 .env(비커밋)에서 로드.
+    # 로컬 uvicorn(--env-file)과 같은 파일을 공유한다. 템플릿: web/backend/.env.example
+    env_file:
+      - ./web/backend/.env
+    environment:              # 컨테이너 전용 경로/모드 — env_file 값보다 우선
+      - DB_PATH=/data/robot.db
+      - POSITIONING_MODE=slam
+      - UPLOAD_DIR=/data/uploads
+      - MAP_DIR=/data/maps
+    volumes:
+      - robotdb:/data          # DB + 업로드 도면 + SLAM 맵 영속화 (재배포해도 유지)
+    restart: unless-stopped
+    # 로컬에서 백엔드 직접 확인하고 싶으면 아래 주석 해제
+    # ports:
+    #   - "8000:8000"
+
+  frontend:
+    build: ./web/frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  robotdb:

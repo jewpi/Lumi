@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="alternate icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 관제 톤: 목업과 동일한 IBM Plex 계열 (본문 Sans KR + 기술 라벨 Mono) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <title>Lumi 동행 관제</title>
+    <!-- 테마는 앱이 뜨기 전에 정해야 한다 — 번들을 기다렸다 칠하면 새로고침할 때마다
+         흰 화면이 한 번 번쩍인다. 저장된 선택이 없을 때만 OS 설정을 따른다.
+         (전환·저장은 stores/theme.js) -->
+    <script>
+      try {
+        var saved = localStorage.getItem('lumi_theme')
+        document.documentElement.dataset.theme =
+          saved ??
+          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
+      } catch (e) {
+        document.documentElement.dataset.theme = 'light'
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

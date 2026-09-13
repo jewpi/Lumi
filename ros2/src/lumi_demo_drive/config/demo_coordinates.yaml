@@ -1,0 +1,36 @@
+lumi_demo_drive:
+  ros__parameters:
+    # true: 아래 map 좌표와 /amcl_pose를 사용
+    # false: step_length * 걸음 수와 /odom을 사용
+    use_map_coordinates: true
+
+    # odom: AMCL 없이, 아래 시작 좌표에 로봇을 정확히 놓았다고 가정
+    # amcl: /amcl_pose에서 실제 map 위치를 받아 사용
+    map_pose_source: odom
+
+    # map_pose_source가 odom일 때 로봇의 출발 map 좌표와 방향
+    # yaw: map의 +x축 방향이 0도, 반시계 방향이 +값
+    start_map_x: 0.0
+    start_map_y: 0.0
+    start_map_yaw_deg: 0.0
+
+    # 첫 번째 직진 후 멈출 map 좌표
+    first_target_x: 2.88
+    first_target_y: 0.0
+
+    # 두 번째 직진 후 오른쪽으로 회전할 map 좌표
+    second_target_x: 17.28
+    second_target_y: 0.0
+
+    # 시나리오 동작값
+    turn_angle_deg: 90.0
+    pause_seconds: 5.0
+    start_delay: 3.0
+    linear_speed: 0.15
+    angular_speed: 0.35
+    distance_tolerance: 0.08
+    angle_tolerance_deg: 2.0
+
+    cmd_vel_topic: /cmd_vel
+    map_pose_topic: /amcl_pose
+    odom_timeout: 0.5

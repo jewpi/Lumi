@@ -1,0 +1,28 @@
+{
+  "beacons": [
+    {
+      "id": "beacon_1",
+      "no": 1,
+      "name": "엘리베이터 비콘",
+      "location": "1층 엘리베이터",
+      "mac_address": "F2:60:31:32:17:86",
+      "uuid": "",
+      "major": 1,
+      "minor": 1,
+      "arrival_rssi": -65,
+      "rssi_offset": -6
+    },
+    {
+      "id": "beacon_2",
+      "no": 2,
+      "name": "강의실 비콘",
+      "location": "A동 101호",
+      "mac_address": "F2:60:31:32:17:58",
+      "uuid": "",
+      "major": 1,
+      "minor": 2,
+      "arrival_rssi": -65,
+      "rssi_offset": -4
+    }
+  ]
+}

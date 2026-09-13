@@ -1,0 +1,20 @@
+[Unit]
+Description=Lumi BLE beacon scanner and web bridge
+Wants=network-online.target
+After=network-online.target bluetooth.service
+
+[Service]
+Type=simple
+User=ssafy
+WorkingDirectory=/home/ssafy/ros2_ws
+Environment=ROS_DOMAIN_ID=10
+Environment=ROS_LOCALHOST_ONLY=1
+Environment=RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+ExecStart=/bin/bash -c "source /opt/ros/humble/setup.bash && source /home/ssafy/ros2_ws/install/setup.bash && exec ros2 launch lumi_beacon beacon.launch.py log_level:=warn"
+KillSignal=SIGINT
+Restart=on-failure
+RestartSec=3
+TimeoutStopSec=10
+
+[Install]
+WantedBy=multi-user.target
